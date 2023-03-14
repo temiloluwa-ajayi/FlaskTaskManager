@@ -1,8 +1,11 @@
 body{
     margin: 0;
-    border: 1px solid black;
-    background-color: chocolate;
+    /*border: 1px solid black;*/
+    background-color: burlywood;
     font-family: SansSerif, serif;
+
+    /*background-image: linear-gradient(direction, color-stop1, color-stop2, ...);*/
+    /*background-image: linear-gradient(to bottom right, #cdb4db,rebeccapurple, white, white, black);*/
 }
 
 .head{

@@ -1,10 +1,10 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.testing import db
 from datetime import datetime
 
 app = Flask(__name__)
-# app.config["TEMPLATES_AUTO_RELOAD"] = True
+app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///task_master.db'
 db = SQLAlchemy(app)
 
@@ -27,6 +27,11 @@ def hello_world():  # put application's code here
 
 @app.route('/index', methods=['POST', 'GET'])
 def index():
+    if request.method == 'POST':
+        pass
+    else:
+        pass
+
     return render_template('index.html', title=index)
 
 

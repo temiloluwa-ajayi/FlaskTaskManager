@@ -1,7 +1,7 @@
 {% extends "Boiler_Plate_Code.html" %}
 
 {% block head %}
-    <h3 class="head">Hey! So what do you wanna do today?</h3>
+    <h3 class="head">Hey! So what do you want to do today?</h3>
 {% endblock head %}
 
 {% block body %}
@@ -18,7 +18,7 @@
                 <th>Actions</th>
             </tr>
 
-             <tr>
+            <tr>
                 <td></td>
                 <td></td>
                 <td>
@@ -36,5 +36,10 @@
         <hr/>
         <hr/>
 
+        <form action="" method="post">
+            <input type="text" name="content" id="content" placeholder="Enter task here">
+            <input type="submit" value="Add Task">
+        </form>
     </div>
+
 {% endblock body %}
