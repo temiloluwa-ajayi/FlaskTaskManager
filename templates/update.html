@@ -1,0 +1,14 @@
+{% extends 'Boiler_Plate_Code.html' %}
+
+{% block head %}
+    <h3>Please put in your task for later.</h3>
+{% endblock head %}
+
+{% block body %}
+    <div>
+        <form action="/update/{{ task.id }}" method="post">
+            <label for="content"></label><input type="text" name="content" id="content" value="{{ task.content }}">
+            <input type="submit" value="Update Task">
+        </form>
+    </div>
+{% endblock body %}

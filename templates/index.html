@@ -18,15 +18,17 @@
                 <th>Actions</th>
             </tr>
 
-            <tr>
-                <td></td>
-                <td></td>
-                <td>
-                    <a href="">Update</a>
-                    <br>
-                    <a href="">Delete</a>
-                </td>
-            </tr>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.content }}</td>
+                    <td>{{ task.date_created }}</td>
+                    <td>
+                        <a href="/update/{{ task.id }}">Update</a>
+                        <br>
+                        <a href="/delete/{{ task.id }}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
 
         </table>
 
@@ -36,8 +38,8 @@
         <hr/>
         <hr/>
 
-        <form action="" method="post">
-            <input type="text" name="content" id="content" placeholder="Enter task here">
+        <form action="/" method="post">
+            <label for="content"></label><input type="text" name="content" id="content" placeholder="Enter task here">
             <input type="submit" value="Add Task">
         </form>
     </div>

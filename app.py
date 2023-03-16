@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.testing import db
+# from sqlalchemy.testing import db
 from datetime import datetime
 
 app = Flask(__name__)
@@ -20,19 +20,58 @@ class Todo(db.Model):
         return '<Task %r' % self.id
 
 
-@app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello World!'
+# @app.route('/')
+# def hello_world():  # put application's code here
+#     return 'Hello World!'
 
 
-@app.route('/index', methods=['POST', 'GET'])
+@app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
-        pass
-    else:
-        pass
+        task_content = request.form['content']
+        new_task = Todo(content=task_content)
 
-    return render_template('index.html', title=index)
+        try:
+            db.session.add(new_task)
+            db.session.commit()
+            return redirect('/')
+        except:
+            return "The task could not be added"
+
+    else:
+        tasks = Todo.query.order_by(Todo.date_created).all()
+        return render_template('index.html', tasks=tasks, title=index)
+
+
+@app.route('/delete/<int:id>')
+def delete(id):
+    task_to_delete = Todo.query.get_or_404(id)
+
+    try:
+        db.session.delete(task_to_delete)
+        db.session.commit()
+        return redirect('/')
+
+    except:
+        "The task could ot be deleted"
+
+
+@app.route('/update/<int:id>', methods=['GET', 'POST'])
+def update(id):
+    task = Todo.query.get_or_404(id)
+
+    if request.method == 'POST':
+        task.content = request.form['content']
+
+        try:
+            db.session.commit()
+            return redirect('/')
+
+        except:
+            "Task cannot be updated at the moment, Please try adding another task."
+
+    else:
+        return render_template('update.html', task=task, title=update)
 
 
 if __name__ == '__main__':
